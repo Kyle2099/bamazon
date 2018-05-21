@@ -102,6 +102,7 @@ function displayLowInventory() {
 		console.log('Low Inventory Items (below 100): ');
 		console.log('................................\n');
 
+
 		var strOut = '';
 		for (var i = 0; i < data.length; i++) {
 			strOut = '';
@@ -114,7 +115,9 @@ function displayLowInventory() {
 			console.log(strOut);
 		}
 
-	  	console.log("--------------------------\n");
+		  console.log("--------------------------\n");
+		  
+		
 
 		connection.end();
 	})

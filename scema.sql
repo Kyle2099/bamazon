@@ -25,4 +25,16 @@ Values ("Ice cream", "Grocery", 5.00, 5277),
 ("Orange Juice", "Grocery", 25.00, 23),
 ("Ibuprophen", "Pharmacy", 75.00, 5);
 
+CREATE TABLE Departments(
+    DepartmentID MEDIUMINT AUTO_INCREMENT NOT NULL,
+    DepartmentName VARCHAR(50) NOT NULL,
+    OverHeadCosts DECIMAL(10,2) NOT NULL,
+    TotalSales DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(DepartmentID));
 
+
+
+INSERT INTO Departments (DepartmentName, OverHeadCosts, TotalSales)
+VALUES ('Grocery', 50000.00, 15000.00),
+    ('Clothing', 20000.00, 12000.00),
+    ('Sports', 30000.00, 15000.00);

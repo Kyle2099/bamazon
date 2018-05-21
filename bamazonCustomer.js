@@ -8,10 +8,10 @@ var connection = mysql.createConnection({
 	// Your username
 	user: 'root',
 
-    // Your password
-    password: 'root',
-    database: 'bamazonDB',
-    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+	// Your password
+	password: 'root',
+	database: 'bamazonDB',
+	socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
 });
 
 
@@ -46,19 +46,19 @@ function promptUserPurchase() {
 			validate: validateInput,
 			filter: Number
 		}
-	]).then(function(input) {
+	]).then(function (input) {
 		// console.log('Customer has selected: \n    item_id = '  + input.item_id + '\n    quantity = ' + input.quantity);
 
 		var item = input.item_id;
 		var quantity = input.quantity;
 
-		
+
 		var queryStr = 'SELECT * FROM products WHERE ?';
 
-		connection.query(queryStr, {item_id: item}, function(err, data) {
+		connection.query(queryStr, { item_id: item }, function (err, data) {
 			if (err) throw err;
 
-			
+
 			// console.log('data = ' + JSON.stringify(data));
 
 			if (data.length === 0) {
@@ -71,16 +71,16 @@ function promptUserPurchase() {
 				// console.log('productData = ' + JSON.stringify(productData));
 				// console.log('productData.stock_quantity = ' + productData.stock_quantity);
 
-				
+
 				if (quantity <= productData.stock_quantity) {
 					console.log('Congratulations, the product you requested is in stock! Placing order!');
 
-					
-					var uQuery = 'UPDATE products SET stock_quantity = ' + (productData.stock_quantity - quantity) + ' WHERE item_id = ' + item;
-                    // console.log('uQuery = ' + uQuery);
 
-				
-					connection.query(uQuery, function(err, data) {
+					var uQuery = 'UPDATE products SET stock_quantity = ' + (productData.stock_quantity - quantity) + ' WHERE item_id = ' + item;
+					// console.log('uQuery = ' + uQuery);
+
+
+					connection.query(uQuery, function (err, data) {
 						if (err) throw err;
 
 						console.log('Order processed! Your total is $' + productData.price * quantity);
@@ -88,14 +88,14 @@ function promptUserPurchase() {
 						console.log("\n----------------------------\n");
 
 						// End the database connection
-						connection.end();
+						
 					})
 				} else {
 					console.log('Sorry, Insufficient quantity! Please check back later.');
 					console.log('Please modify your quantity.');
 					console.log("\n-----------------------\n");
 
-					displayInventory();
+					// displayInventory();
 				}
 			}
 		})
@@ -108,7 +108,7 @@ function displayInventory() {
 
 	queryStr = 'SELECT * FROM products';
 
-	connection.query(queryStr, function(err, data) {
+	connection.query(queryStr, function (err, data) {
 		if (err) throw err;
 
 		console.log('Existing Inventory: ');
@@ -125,10 +125,10 @@ function displayInventory() {
 			console.log(strOut);
 		}
 
-	  	console.log("------------\n");
+		console.log("------------\n");
 
-	  	
-	  	promptUserPurchase();
+
+		promptUserPurchase();
 	})
 }
 
