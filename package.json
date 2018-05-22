@@ -4,6 +4,7 @@
   "description": "",
   "main": "bamazonCustomer.js",
   "dependencies": {
+    "console.table": "^0.10.0",
     "dotenv": "^5.0.1",
     "init": "^0.1.2",
     "inquirer": "^5.2.0",
