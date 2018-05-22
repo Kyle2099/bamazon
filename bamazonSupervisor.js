@@ -1,12 +1,14 @@
 //require mysql and inquirer
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+require('dotenv').config();
+// console.log(process.env);
 //create connection to db
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "root",
+  password: process.env.password,
   database: "bamazonDB",
     socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
 })

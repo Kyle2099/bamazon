@@ -1,5 +1,7 @@
 var inquirer = require('inquirer');
 var mysql = require('mysql');
+require('dotenv').config();
+// console.log(process.env);
 
 var connection = mysql.createConnection({
 	host: 'localhost',
@@ -9,7 +11,7 @@ var connection = mysql.createConnection({
 	user: 'root',
 
 	// Your password
-	password: 'root',
+	password: process.env.password,
 	database: 'bamazonDB',
 	socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
 });
@@ -88,7 +90,8 @@ function promptUserPurchase() {
 						console.log("\n----------------------------\n");
 
 						// End the database connection
-						
+						// displayInventory();
+						moreShopping();
 					})
 				} else {
 					console.log('Sorry, Insufficient quantity! Please check back later.');
@@ -96,12 +99,28 @@ function promptUserPurchase() {
 					console.log("\n-----------------------\n");
 
 					// displayInventory();
+					moreShopping();
 				}
 			}
 		})
 	})
 }
-
+function moreShopping() {
+	inquirer.prompt ([
+		{
+			type: 'confirm',
+			name: 'continue',
+			message: 'Would you like to continue?',
+		}
+	]).then(function (answers) {
+		if (answers.continue) {
+			displayInventory()
+		} else {
+			console.log("Thank you for shopping with bamazon! We hope to see you again soon.")
+			connection.end();
+		}
+	})
+};
 
 function displayInventory() {
 	// console.log('___ENTER displayInventory___');
