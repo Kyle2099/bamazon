@@ -1,6 +1,6 @@
 In this application I have created an Amazon-like storefront with the MySQL skills that I have learned. The app will take in orders from customers and deplete stock from the store's inventory. I have you programed the app to track product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
 
-This is a CLI application. 
+This is a CLI application. The application can be found at https://github.com/Kyle2099/bamazon
 
 The Customer View -
 
